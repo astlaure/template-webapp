@@ -1,0 +1,11 @@
+.idea
+.vscode
+
+/bin
+/public
+/node_modules
+/logs
+/coverage
+/uploads
+
+.env
