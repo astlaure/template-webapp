@@ -60,6 +60,9 @@ Role.hasMany(User, {
   sourceKey: 'id',
   as: 'role',
 });
-User.belongsTo(Role);
+User.belongsTo(Role, {
+  foreignKey: 'roleId',
+  as: 'role',
+});
 
 export default User;

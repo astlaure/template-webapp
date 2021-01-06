@@ -9,6 +9,7 @@ import csrfMiddleware from './security/csrf/csrf.middleware';
 import securityRouter from './security/security.router';
 import config from './core/config';
 import appRouter from './app.router';
+import userRouter from './security/users/user.router';
 
 const app = express();
 const { secret } = config;
@@ -28,6 +29,7 @@ app.use(express.static('public'));
 app.use('uploads', express.static('uploads'));
 
 app.use('/api/security', securityRouter);
+app.use('/api/users', userRouter);
 app.use(appRouter);
 
 export default app;

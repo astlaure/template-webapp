@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 
 const encode = (password: string): Promise<string> => {
+  if (!password) { throw Error('password is null|undefined|empty.'); }
   return bcrypt.hash(password, 10);
 };
 

@@ -19,13 +19,15 @@ userRouter.post('/', async (req, res) => {
   try {
     await User.create({
       ...req.body,
-      password: bcryptUtil.encode(req.body.password),
+      password: await bcryptUtil.encode(req.body.password),
     });
 
     return res.sendStatus(201);
   } catch (err) {
     if (err instanceof ValidationError) {
-      return res.status(400).json(err.errors);
+      return res.status(400).json({
+        message: 'There was validation issues',
+      });
     }
     return res.sendStatus(500);
   }

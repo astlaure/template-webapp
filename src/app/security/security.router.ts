@@ -2,25 +2,26 @@ import express from 'express';
 import security from './security';
 import authMiddleware from './auth/auth.middleware';
 import limiter from '../core/limiter';
+import User from './users/user.model';
 
 const securityRouter = express.Router();
 const localMiddleware = security.authenticate('local', { session: true });
 
 securityRouter.use(limiter);
 
-securityRouter.post('/userinfo', authMiddleware, (req, res) => {
-  const { username, role } = res.locals.user;
+securityRouter.get('/userinfo', authMiddleware, (req, res) => {
+  const { username, role } = req.user as User;
   return res.json({
     username,
-    role,
+    role: role.name,
   });
 });
 
 securityRouter.post('/login', localMiddleware, (req, res) => {
-  const { username, role } = res.locals.user;
+  const { username, role } = req.user as User;
   return res.json({
     username,
-    role,
+    role: role.name,
   });
 });
 
